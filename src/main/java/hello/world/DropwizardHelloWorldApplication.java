@@ -1,5 +1,6 @@
 package hello.world;
 
+import hello.world.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -23,7 +24,11 @@ public class DropwizardHelloWorldApplication extends Application<DropwizardHello
     @Override
     public void run(final DropwizardHelloWorldConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+        final HelloWorldResource resource = new HelloWorldResource(
+                configuration.getTemplate(),
+                configuration.getDefaultName()
+        );
+        environment.jersey().register(resource);
     }
 
 }
