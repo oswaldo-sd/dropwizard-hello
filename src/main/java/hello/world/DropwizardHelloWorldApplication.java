@@ -2,6 +2,7 @@ package hello.world;
 
 import hello.world.health.TemplateHealthCheck;
 import hello.world.resources.HelloWorldResource;
+import hello.world.resources.UserResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -33,6 +34,8 @@ public class DropwizardHelloWorldApplication extends Application<DropwizardHello
                 configuration.getDefaultName()
         );
         environment.jersey().register(resource);
+        final UserResource userResource = new UserResource();
+        environment.jersey().register(userResource);
 
         final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
         environment.healthChecks().register("template", healthCheck);
